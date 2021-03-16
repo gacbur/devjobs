@@ -1,9 +1,14 @@
-import React from 'react'
-import { Nav, NavLink, LogoCnt, NavCnt } from './NavbarElements'
+import React, { FC } from 'react'
+import { Nav, NavLink, LogoCnt, NavCnt, ThemeToggler } from './NavbarElements'
 
 import { VscPinned } from 'react-icons/vsc'
 
-const Navbar = () => {
+type NavbarProps = {
+    theme: string,
+    toggleTheme: (() => void)
+}
+
+const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
     return (
         <NavCnt>
             <Nav>
@@ -12,7 +17,13 @@ const Navbar = () => {
                 </LogoCnt>
                 <ul>
                     <li className="pin"><NavLink to="/pinned"><VscPinned /></NavLink></li>
-                    <li><button>toggle light/darktheme</button></li>
+                    <li>
+                        <ThemeToggler
+                            type='button'
+                            onClick={() => toggleTheme()}
+                        >
+                            toggle light/darktheme
+                            </ThemeToggler></li>
                 </ul>
             </Nav>
         </NavCnt>

@@ -1,5 +1,4 @@
-import { HomeCnt, Search, InputCnt, FilterInput, LocationInput } from './HomeElements'
-
+import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox } from './HomeElements'
 
 const Home = () => {
     return (
@@ -19,7 +18,12 @@ const Home = () => {
 
                     </LocationInput>
                 </InputCnt>
-                <InputCnt></InputCnt>
+                <InputCnt>
+                    <FullTimeCheckbox />
+                    <label htmlFor="full-time-checkbox">
+                        Full Time
+                     </label>
+                </InputCnt>
             </Search>
             Home
         </HomeCnt>

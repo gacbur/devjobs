@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+
 export const NavCnt = styled.div`
     width:100%;
     display:flex;
     justify-content:center;
-`
+    `
 
 export const Nav = styled.nav`
     width: 100%;
@@ -19,7 +20,7 @@ export const Nav = styled.nav`
     border-bottom-left-radius: 80px;
     height:100px;
     background: rgb(117,178,215);
-background: linear-gradient(90deg, rgba(117,178,215,1) 0%, rgba(207,190,255,1) 100%);
+    background: linear-gradient(90deg, rgba(117,178,215,1) 0%, rgba(207,190,255,1) 100%);
 
     ul{
         width:100%;
@@ -62,6 +63,11 @@ export const LogoCnt = styled.div`
         width:100%;
         height:100%;
     }
+`
+
+export const ThemeToggler = styled.button`
+    height:50px;;
+    transition: .5s;
 `
 
 export const NavLink = styled(Link)`

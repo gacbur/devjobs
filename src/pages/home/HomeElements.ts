@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const HomeCnt = styled.div`
     width:90%;
     display:flex;
@@ -9,7 +8,8 @@ export const HomeCnt = styled.div`
 `
 
 export const Search = styled.div`
-    background-color:white;
+    background-color: ${props => props.theme.elementsBackgroundColor};
+    transition: .3s;
     height:4em;
     padding:.5em 1em;
     margin-bottom:4em;
@@ -21,16 +21,15 @@ export const Search = styled.div`
     `
 
 export const InputCnt = styled.div`
-outline:1px solid red;
     width:33%;
     height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
-    border-left: 1px solid lightgray;
+    border-left: solid 1px ${props => props.theme.elementsBorder};
 
     &:first-child{
-        border-left:none;
+        border-left: none;
     }
 `
 
@@ -40,6 +39,10 @@ export const FilterInput = styled.input`
     height:90%;
     padding:.5em;
     border:none;
+    background-color: ${props => props.theme.elementsBackgroundColor};
+    color: ${props => props.theme.TextColorSecondary};
+    transition: .3s;
+
 `
 
 export const LocationInput = styled.input`
@@ -47,4 +50,16 @@ export const LocationInput = styled.input`
     height:90%;
     padding:.5em;
     border:none;
+    background-color: ${props => props.theme.elementsBackgroundColor};
+    color: ${props => props.theme.TextColorSecondary};
+    transition: .3s;
+`
+
+export const FullTimeCheckbox = styled.input.attrs({
+    type: 'checkbox',
+    id: 'full-time-checkbox'
+})`
+    height:20px;
+    width:20px;
+    margin-right:.6em;
 `
