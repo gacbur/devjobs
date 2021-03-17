@@ -40,9 +40,15 @@ export const Nav = styled.nav`
                     text-decoration:none;
                     color:white;
                     font-size:25px;
+                    padding:.5em;
                     display:flex;
                     justify-content:center;
                     align-items:center;
+                    transition: .3s;
+
+                    &:hover{
+                        color: ${props => props.theme.TextColorSecondary}
+                    }
                 }
             }
         }
@@ -50,7 +56,7 @@ export const Nav = styled.nav`
 `
 
 export const LogoCnt = styled.div`
-    width:100px;
+    width:120px;
     height:50px;
 
     a{
@@ -62,12 +68,28 @@ export const LogoCnt = styled.div`
         align-items:center;
         width:100%;
         height:100%;
+        transition: .3s;
+
+        &:hover{
+            color: ${props => props.theme.TextColorSecondary}
+        }
     }
 `
 
 export const ThemeToggler = styled.button`
-    height:50px;;
-    transition: .5s;
+    cursor:pointer;
+    font-size:20px;
+    display:flex;
+    background-color: rgba(0,0,0,0);
+    border:none;
+    color:white;
+    padding:.5em;
+    transition: .3s;
+    outline:none;
+
+    &:hover{
+        color: ${props => props.theme.TextColorSecondary}
+    }
 `
 
 export const NavLink = styled(Link)`

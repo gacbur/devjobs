@@ -6,14 +6,14 @@ export type job = {
     id: string,
     type: string,
     url: string,
-    createdAt: string,
+    created_at: string,
     company: string,
-    companyUrl: string,
+    company_url: string,
     location: string,
     title: string,
     description: string,
-    howToApply: string,
-    companyLogo: string
+    how_to_apply: string,
+    company_logo: string
 }
 
 export interface GetJobsSuccess {

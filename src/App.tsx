@@ -25,7 +25,7 @@ function App() {
         <GlobalStyles />
         <AppWrapper>
           <Router>
-            <Navbar toggleTheme={themeToggler} />
+            <Navbar theme={theme} toggleTheme={themeToggler} />
             <Main />
           </Router>
         </AppWrapper>

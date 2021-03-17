@@ -1,19 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { getJobsError, getJobsLoading, getJobsSuccess } from '../../redux/jobs/jobsActions'
 
+import { RootStore } from '../../redux/Store'
+
 import Axios from 'axios'
 
-import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, SearchButton } from './HomeElements'
+import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, SearchButton, JobList } from './HomeElements'
 
-import { StandardButton } from '../../components/reusable/StandardButton'
+import { LoadMoreBtn } from './HomeElements'
+
+import JobItem from '../../components/jobItem/JobItem'
+
+
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const Home = () => {
 
-    const dispatch = useDispatch()
+    const jobs = useSelector((state: RootStore) => state.jobs.jobs)
 
+    const dispatch = useDispatch()
 
     let currentPage = 1;
 
@@ -48,8 +56,6 @@ const Home = () => {
         getJobs(path)
     }
 
-
-
     return (
         <HomeCnt>
             <Search>
@@ -75,9 +81,22 @@ const Home = () => {
                     <SearchButton>Search</SearchButton>
                 </InputCnt>
             </Search>
-            <StandardButton
-                onClick={() => handleLoadMoreJobs()}
-            >Load More</StandardButton>
+            {jobs.length > 0 ?
+                <JobList>
+                    {jobs.map(item => {
+                        return <JobItem key={item.id} item={item} />
+                    })}
+                </JobList>
+                :
+                <ClipLoader size={80} color="#3470a8" />
+            }
+            {jobs.length > 0 ?
+                <LoadMoreBtn
+                    onClick={() => handleLoadMoreJobs()}
+                >Load More</LoadMoreBtn>
+                :
+                null
+            }
         </HomeCnt>
     )
 }

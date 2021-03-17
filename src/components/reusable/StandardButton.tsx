@@ -11,6 +11,7 @@ const Button = styled.button.attrs({
     background-color: #234f94;
     border-radius: 5px;
     color: white;
+    transition:.2s;
 
     &:hover{
         background-color: #1d4079;

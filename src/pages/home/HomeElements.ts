@@ -14,12 +14,12 @@ export const Search = styled.div`
     transition: .3s;
     height:4em;
     padding:.5em 1em;
-    margin-bottom:4em;
+    margin-bottom:3.5em;
     width:100%;
     max-width:1000px;
     display:flex;
     border-radius:10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
     `
 
 export const InputCnt = styled.div`
@@ -51,7 +51,6 @@ export const FilterInput = styled.input`
     transition: .3s;
 
 `
-
 export const LocationInput = styled.input`
     width:95%;
     height:90%;
@@ -74,4 +73,27 @@ export const FullTimeCheckbox = styled.input.attrs({
 
 export const SearchButton = styled(StandardButton)`
     margin-left:auto;
+`
+
+export const LoadMoreBtn = styled(StandardButton)`
+    margin-top:3em;
+    margin-bottom:7em;
+`
+
+export const JobList = styled.div`
+    width:100%;
+    max-width:1000px;
+    min-height:500px;
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  
+  @media all and (max-width: 1050px) {
+      grid-template-columns: repeat(2, auto);
+  }
+  
+  @media all and (max-width: 678px) {
+      grid-template-columns: 1fr;
+  }
 `
