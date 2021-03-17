@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { StandardButton } from '../../components/reusable/StandardButton'
+
 export const HomeCnt = styled.div`
     width:90%;
     display:flex;
@@ -31,6 +33,11 @@ export const InputCnt = styled.div`
     &:first-child{
         border-left: none;
     }
+
+    label{
+        color: ${props => props.theme.TextColorMain};
+        font-size:15px;
+    }
 `
 
 export const FilterInput = styled.input`
@@ -61,5 +68,10 @@ export const FullTimeCheckbox = styled.input.attrs({
 })`
     height:20px;
     width:20px;
+    margin-left:1em;
     margin-right:.6em;
+`
+
+export const SearchButton = styled(StandardButton)`
+    margin-left:auto;
 `

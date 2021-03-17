@@ -16,6 +16,8 @@ function App() {
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
+  console.log('rerender')
+
   if (!mountedComponent) return <div />
   return (
     <ThemeProvider theme={themeMode}>
@@ -23,7 +25,7 @@ function App() {
         <GlobalStyles />
         <AppWrapper>
           <Router>
-            <Navbar theme={theme} toggleTheme={themeToggler} />
+            <Navbar toggleTheme={themeToggler} />
             <Main />
           </Router>
         </AppWrapper>

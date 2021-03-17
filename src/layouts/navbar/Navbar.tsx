@@ -4,11 +4,10 @@ import { Nav, NavLink, LogoCnt, NavCnt, ThemeToggler } from './NavbarElements'
 import { VscPinned } from 'react-icons/vsc'
 
 type NavbarProps = {
-    theme: string,
     toggleTheme: (() => void)
 }
 
-const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
+const Navbar: FC<NavbarProps> = ({ toggleTheme }) => {
     return (
         <NavCnt>
             <Nav>
@@ -22,7 +21,7 @@ const Navbar: FC<NavbarProps> = ({ theme, toggleTheme }) => {
                             type='button'
                             onClick={() => toggleTheme()}
                         >
-                            toggle light/darktheme
+                            darkmode
                             </ThemeToggler></li>
                 </ul>
             </Nav>

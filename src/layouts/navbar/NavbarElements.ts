@@ -20,7 +20,7 @@ export const Nav = styled.nav`
     border-bottom-left-radius: 80px;
     height:100px;
     background: rgb(117,178,215);
-    background: linear-gradient(90deg, rgba(117,178,215,1) 0%, rgba(207,190,255,1) 100%);
+    background: linear-gradient(180deg, rgba(117,178,215,1) 0%, rgba(111,61,252,1) 100%);
 
     ul{
         width:100%;
