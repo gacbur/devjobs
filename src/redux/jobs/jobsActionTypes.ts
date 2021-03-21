@@ -1,6 +1,7 @@
-export const GET_JOBS_SUCCESS = "GET_JOBS_SUCCESS"
-export const GET_JOBS_ERROR = "GET_JOBS_ERROR"
-export const GET_JOBS_LOADING = "GET_JOBS_LOADING"
+export const JOBS_MAKE_REQUEST = "JOBS_MAKE_REQUEST"
+export const JOBS_GET_DATA = "JOBS_GET_DATA"
+export const JOBS_ERROR = "JOBS_ERROR"
+export const JOBS_HAS_NEXT_PAGE = "JOBS_HAS_NEXT_PAGE"
 
 export type job = {
     id: string,
@@ -16,20 +17,24 @@ export type job = {
     company_logo: string
 }
 
-export interface GetJobsSuccess {
-    type: typeof GET_JOBS_SUCCESS,
+export interface JobsMakeRequest {
+    type: typeof JOBS_MAKE_REQUEST,
+}
+
+export interface JobsGetData {
+    type: typeof JOBS_GET_DATA,
     payload: job[]
 }
 
-export interface GetJobsError {
-    type: typeof GET_JOBS_ERROR,
+export interface JobsError {
+    type: typeof JOBS_ERROR,
+    payload: string
+}
+
+export interface JobsHasNextPage {
+    type: typeof JOBS_HAS_NEXT_PAGE,
     payload: boolean
 }
 
-export interface GetJobsLoading {
-    type: typeof GET_JOBS_LOADING,
-    payload: boolean
-}
 
-
-export type JobsDispatchTypes = GetJobsSuccess | GetJobsError | GetJobsLoading
+export type JobsDispatchTypes = JobsMakeRequest | JobsGetData | JobsError | JobsHasNextPage

@@ -4,6 +4,7 @@ export const darkTheme = {
     elementsBorder: '#4e5a6e',
     TextColorSecondary: 'darkgray',
     TextColorMain: 'white',
+    LinkColor: 'lightblue'
 };
 
 export const lightTheme = {
@@ -12,4 +13,5 @@ export const lightTheme = {
     elementsBorder: 'lightgray',
     TextColorSecondary: 'darkgray',
     TextColorMain: 'black',
+    LinkColor: 'blue'
 }

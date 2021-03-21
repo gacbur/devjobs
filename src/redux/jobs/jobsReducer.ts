@@ -1,40 +1,40 @@
-import { GET_JOBS_ERROR, GET_JOBS_LOADING, GET_JOBS_SUCCESS, job, JobsDispatchTypes } from './jobsActionTypes'
+import { JOBS_MAKE_REQUEST, JOBS_GET_DATA, JOBS_ERROR, JOBS_HAS_NEXT_PAGE, job, JobsDispatchTypes } from './jobsActionTypes'
 
 interface InitialStateI {
     jobs: job[],
-    getJobsLoading: boolean,
-    getJobsError: boolean,
+    loading?: boolean,
+    error?: string,
+    hasNextPage?: boolean
 }
 
 const initialState: InitialStateI = {
     jobs: [],
-    getJobsLoading: false,
-    getJobsError: false
 }
 
 const jobsReducer = (state: InitialStateI = initialState, action: JobsDispatchTypes): InitialStateI => {
     switch (action.type) {
-        case GET_JOBS_LOADING:
+        case JOBS_MAKE_REQUEST:
             return {
                 ...state,
-                getJobsLoading: action.payload
+                jobs: [],
+                loading: true
             }
-        case GET_JOBS_SUCCESS:
-            if (state.jobs.length > 0) {
-                return {
-                    ...state,
-                    jobs: [...state.jobs, ...action.payload],
-                }
-            } else {
-                return {
-                    ...state,
-                    jobs: action.payload
-                }
-            }
-        case GET_JOBS_ERROR:
+        case JOBS_GET_DATA:
             return {
                 ...state,
-                getJobsError: action.payload
+                jobs: action.payload,
+                loading: false
+            }
+        case JOBS_ERROR:
+            return {
+                jobs: [],
+                loading: false,
+                error: action.payload
+            }
+        case JOBS_HAS_NEXT_PAGE:
+            return {
+                ...state,
+                hasNextPage: action.payload
             }
         default:
             return state

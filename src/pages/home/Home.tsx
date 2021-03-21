@@ -1,60 +1,28 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getJobsError, getJobsLoading, getJobsSuccess } from '../../redux/jobs/jobsActions'
-
 import { RootStore } from '../../redux/Store'
 
-import Axios from 'axios'
 
 import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, SearchButton, JobList } from './HomeElements'
 
 import { LoadMoreBtn } from './HomeElements'
 
 import JobItem from '../../components/jobItem/JobItem'
-
+import JobsPagination from '../../components/jobsPagination/JobsPagination'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
+import useFetchJobs from '../../hooks/useFetchJobs'
+
 const Home = () => {
 
-    const jobs = useSelector((state: RootStore) => state.jobs.jobs)
+    const [params, setParams] = useState({})
+    const [page, setPage] = useState(1)
 
-    const dispatch = useDispatch()
+    const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page)
 
-    let currentPage = 1;
-
-    const getJobs = (path: string) => {
-        let isLoading = true
-        dispatch(getJobsLoading(isLoading))
-
-        Axios.get(path)
-            .then(response => response.data)
-            .then(data => {
-                console.log(data)
-                dispatch(getJobsSuccess(data))
-                isLoading = false
-                dispatch(getJobsLoading(isLoading))
-            })
-            .catch(error => {
-                console.log(error)
-                isLoading = false
-                dispatch(getJobsLoading(isLoading))
-                dispatch(getJobsError(true))
-            })
-    }
-
-    useEffect(() => {
-        const path = `/positions.json?page=1`
-        getJobs(path)
-    }, [])
-
-
-    const handleLoadMoreJobs = () => {
-        const path = `/positions.json?page=${currentPage + 1}`
-        getJobs(path)
-    }
 
     return (
         <HomeCnt>
@@ -81,22 +49,19 @@ const Home = () => {
                     <SearchButton>Search</SearchButton>
                 </InputCnt>
             </Search>
-            {jobs.length > 0 ?
-                <JobList>
-                    {jobs.map(item => {
-                        return <JobItem key={item.id} item={item} />
-                    })}
-                </JobList>
-                :
-                <ClipLoader size={80} color="#3470a8" />
+            {loading && <ClipLoader size={80} color="#3470a8" />}
+            {error && <h1>Error. Try refreshing.</h1>}
+            {
+                jobs.length > 0 ?
+                    <JobList>
+                        {jobs.map(item => {
+                            return <JobItem key={item.id} item={item} />
+                        })}
+                    </JobList>
+                    :
+                    null
             }
-            {jobs.length > 0 ?
-                <LoadMoreBtn
-                    onClick={() => handleLoadMoreJobs()}
-                >Load More</LoadMoreBtn>
-                :
-                null
-            }
+            <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>
         </HomeCnt>
     )
 }
