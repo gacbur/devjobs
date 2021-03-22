@@ -12,11 +12,12 @@ const initialState: InitialStateI = {
 const pinnedJobsReducer = (state: InitialStateI = initialState, action: PinnedJobsDispatchTypes): InitialStateI => {
     switch (action.type) {
         case ADD_TO_PINNED:
-            return {
-                pinnedJobs: state.pinnedJobs.length === 0 ?
-                    [action.payload]
-                    :
-                    [...state.pinnedJobs, action.payload]
+            if (state.pinnedJobs.includes(action.payload)) {
+                return state
+            } else {
+                return {
+                    pinnedJobs: [...state.pinnedJobs, action.payload]
+                }
             }
         case REMOVE_FROM_PINNED:
             const temp_pinnedJobs = state.pinnedJobs.filter(item => item.id !== action.payload)

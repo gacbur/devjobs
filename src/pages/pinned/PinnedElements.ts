@@ -17,3 +17,20 @@ export const TitleH4 = styled.h4`
     font-size:15px;
 `
 
+export const ItemList = styled.div`
+    width:100%;
+    padding:2em 0em;
+    justify-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @media all and (max-width: 1050px){
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media all and (max-width: 640px){
+            grid-template-columns: repeat(1, 1fr);
+    }
+
+`
+

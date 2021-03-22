@@ -7,6 +7,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { RootStore } from '../../redux/Store'
 
 import { getSingleJobError, getSingleJobItem, getSingleJobLoading } from '../../redux/singleJobItem/singleJobItemActions'
+import { addToPinned } from '../../redux/pinnedJobs/pinnedJobsActions'
 
 import { Item, ItemLogo, ItemCompanyH4, ItemDateP, ItemEmploymentP, ItemTitleH3, ItemLocationH6, ItemDescription, ItemPinBtn } from './SingleJobItemElements'
 
@@ -43,7 +44,6 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
         const getJobItem = (jobsItemId: string) => {
             const item = jobs.filter(item => item.id === jobsItemId)
             if (item[0]) {
-                console.log(item[0])
                 dispatch(getSingleJobItem(item[0]))
                 isLoading = false
                 dispatch(getSingleJobLoading(isLoading))
@@ -57,6 +57,11 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
 
         getJobItem(match.params.id)
     }, [])
+
+
+    const handleAddToPinned = () => {
+        dispatch(addToPinned(singleJob))
+    }
 
 
 
@@ -83,7 +88,9 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
                                 `${singleJob.how_to_apply}`
                             )}
                         </ItemDescription>
-                        <ItemPinBtn>
+                        <ItemPinBtn
+                            onClick={() => handleAddToPinned()}
+                        >
                             <VscPinned className="pin" />
                             <BiPlus className="plus" />
                         </ItemPinBtn>
