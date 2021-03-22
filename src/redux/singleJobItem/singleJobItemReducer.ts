@@ -1,4 +1,3 @@
-import { job } from '../jobs/jobsActionTypes'
 import { GET_SINGLE_JOB_ERROR, GET_SINGLE_JOB_ITEM, GET_SINGLE_JOB_LOADING, SingleJobDispatchTypes } from './singleJobItemActionTypes'
 
 interface InitialStateI {

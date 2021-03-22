@@ -1,13 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-
-import { RootStore } from '../../redux/Store'
-
-
-import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, SearchButton, JobList } from './HomeElements'
-
-import { LoadMoreBtn } from './HomeElements'
+import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList } from './HomeElements'
 
 import JobItem from '../../components/jobItem/JobItem'
 import JobsPagination from '../../components/jobsPagination/JobsPagination'
@@ -16,10 +9,25 @@ import ClipLoader from 'react-spinners/ClipLoader'
 
 import useFetchJobs from '../../hooks/useFetchJobs'
 
+type paramsProps = {
+    description?: string,
+    location?: string,
+    full_time?: any
+}
+
 const Home = () => {
 
-    const [params, setParams] = useState({})
+    const [params, setParams] = useState<paramsProps>({})
     const [page, setPage] = useState(1)
+
+    const handleParamChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const param = e.target.name
+        const value = e.target.value
+        setPage(1)
+        setParams(prevParams => {
+            return { ...prevParams, [param]: value }
+        })
+    }
 
     const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page)
 
@@ -30,6 +38,9 @@ const Home = () => {
                 <InputCnt>
                     <FilterInput
                         placeholder="Filter by title, companies, expertise..."
+                        name="description"
+                        value={params.description}
+                        onChange={handleParamChange}
                     >
 
                     </FilterInput>
@@ -37,18 +48,24 @@ const Home = () => {
                 <InputCnt>
                     <LocationInput
                         placeholder="Filter by location..."
+                        name="location"
+                        value={params.location}
+                        onChange={handleParamChange}
                     >
-
                     </LocationInput>
                 </InputCnt>
                 <InputCnt>
-                    <FullTimeCheckbox />
                     <label htmlFor="full-time-checkbox">
                         Full Time
                      </label>
-                    <SearchButton>Search</SearchButton>
+                    <FullTimeCheckbox
+                        value={params.full_time}
+                        onChange={handleParamChange}
+                    >
+                    </FullTimeCheckbox>
                 </InputCnt>
             </Search>
+            {loading ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>}
             {loading && <ClipLoader size={80} color="#3470a8" />}
             {error && <h1>Error. Try refreshing.</h1>}
             {
@@ -61,7 +78,7 @@ const Home = () => {
                     :
                     null
             }
-            <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>
+            {/* {loading ? null : jobs.length === 0 ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>} */}
         </HomeCnt>
     )
 }

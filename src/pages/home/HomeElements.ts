@@ -7,6 +7,7 @@ export const HomeCnt = styled.div`
     display:flex;
     flex-direction: column;
     align-items:center;
+    margin-bottom:7em;
 `
 
 export const Search = styled.div`
@@ -20,23 +21,58 @@ export const Search = styled.div`
     display:flex;
     border-radius:10px;
     box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    
+        @media all and (max-width: 600px){
+            height:fit-content;
+            flex-direction:column;
+        }
     `
 
 export const InputCnt = styled.div`
-    width:33%;
     height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
     border-left: solid 1px ${props => props.theme.elementsBorder};
 
-    &:first-child{
+    &:nth-child(1){
+        width:40%;
         border-left: none;
     }
+
+    &:nth-child(2){
+        width:40%;
+    }
+
+    &:nth-child(3){
+        width:20%;
+    }
+
+    @media all and (max-width: 600px){
+            width:100%;
+            border-left:none;
+            border-bottom: solid 1px ${props => props.theme.elementsBorder};
+            margin:0em 0em .5em 0em;
+
+            &:nth-child(1){
+                width:100%;
+                border-left: none;
+            }
+
+            &:nth-child(2){
+                width:100%;
+            }
+
+            &:nth-child(3){
+                width:100%;
+                border-bottom: none;
+            }
+        }
 
     label{
         color: ${props => props.theme.TextColorMain};
         font-size:15px;
+        margin-left:.5em;
     }
 `
 
@@ -47,8 +83,16 @@ export const FilterInput = styled.input`
     padding:.5em;
     border:none;
     background-color: ${props => props.theme.elementsBackgroundColor};
-    color: ${props => props.theme.TextColorSecondary};
+    color: ${props => props.theme.TextColorMain};
     transition: .3s;
+
+    &::placeholder{
+        color: ${props => props.theme.TextColorMain};
+    }
+
+    @media all and (max-width: 600px){
+           padding:1em .5em;
+        }
 
 `
 export const LocationInput = styled.input`
@@ -57,27 +101,32 @@ export const LocationInput = styled.input`
     padding:.5em;
     border:none;
     background-color: ${props => props.theme.elementsBackgroundColor};
-    color: ${props => props.theme.TextColorSecondary};
+    color: ${props => props.theme.TextColorMain};
     transition: .3s;
+
+    &::placeholder{
+        color: ${props => props.theme.TextColorMain};
+    }
+
+    @media all and (max-width: 600px){
+           padding:1em .5em;
+        }
 `
 
 export const FullTimeCheckbox = styled.input.attrs({
     type: 'checkbox',
-    id: 'full-time-checkbox'
+    id: 'full-time-checkbox',
+    name: "full_time"
 })`
     height:20px;
     width:20px;
     margin-left:1em;
     margin-right:.6em;
-`
 
-export const SearchButton = styled(StandardButton)`
-    margin-left:auto;
-`
 
-export const LoadMoreBtn = styled(StandardButton)`
-    margin-top:3em;
-    margin-bottom:7em;
+    @media all and (max-width: 600px){
+           margin:.8em .5em;
+        }
 `
 
 export const JobList = styled.div`

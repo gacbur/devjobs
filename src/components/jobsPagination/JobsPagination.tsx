@@ -97,8 +97,6 @@ const StyledPaginateContainer = styled.div`
 
 const JobsPagination: FC<JobsPaginationProps> = ({ page, setPage, hasNextPage }) => {
 
-    console.log(page)
-
     return (
         <StyledPaginateContainer>
             <ReactPaginate
@@ -106,13 +104,15 @@ const JobsPagination: FC<JobsPaginationProps> = ({ page, setPage, hasNextPage })
                 nextLabel="next"
                 breakLabel="..."
                 breakClassName="break-me"
-                initialPage={1}
                 containerClassName="pagination"
                 activeClassName="active"
                 pageClassName="page"
                 pageLinkClassName="page"
+                forcePage={page - 1}
                 pageCount={hasNextPage ? page + 1 : page}
-                onPageChange={(props: any) => setPage(props.selected + 1)}
+                onPageChange={(props: any) => {
+                    setPage(props.selected + 1)
+                }}
             >
 
             </ReactPaginate>
