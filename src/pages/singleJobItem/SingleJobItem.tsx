@@ -8,7 +8,10 @@ import { RootStore } from '../../redux/Store'
 
 import { getSingleJobError, getSingleJobItem, getSingleJobLoading } from '../../redux/singleJobItem/singleJobItemActions'
 
-import { JobItem, JobItemLogo, JobItemCompanyH4, JobItemDateP, JobItemEmploymentP, JobItemTitleH3, JobItemLocationH6, JobItemDescription } from './SingleJobItemElements'
+import { Item, ItemLogo, ItemCompanyH4, ItemDateP, ItemEmploymentP, ItemTitleH3, ItemLocationH6, ItemDescription, ItemPinBtn } from './SingleJobItemElements'
+
+import { VscPinned } from 'react-icons/vsc'
+import { BiPlus } from 'react-icons/bi'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -63,24 +66,28 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
                 <ClipLoader size={80} color="#3470a8"></ClipLoader>
                 :
                 singleJob ?
-                    <JobItem>
-                        <JobItemLogo>
+                    <Item>
+                        <ItemLogo>
                             <img src={singleJob.company_logo} alt={singleJob.title} />
-                        </JobItemLogo>
-                        <JobItemCompanyH4>{singleJob.company}</JobItemCompanyH4>
-                        <JobItemDateP>{singleJob.created_at.slice(0, 11)}</JobItemDateP>
-                        <JobItemEmploymentP>{singleJob.type}</JobItemEmploymentP>
-                        <JobItemTitleH3>{singleJob.title}</JobItemTitleH3>
-                        <JobItemLocationH6>{singleJob.location}</JobItemLocationH6>
-                        <JobItemDescription>
+                        </ItemLogo>
+                        <ItemCompanyH4>{singleJob.company}</ItemCompanyH4>
+                        <ItemDateP>{singleJob.created_at.slice(0, 11)}</ItemDateP>
+                        <ItemEmploymentP>{singleJob.type}</ItemEmploymentP>
+                        <ItemTitleH3>{singleJob.title}</ItemTitleH3>
+                        <ItemLocationH6>{singleJob.location}</ItemLocationH6>
+                        <ItemDescription>
                             {parse(
                                 `${singleJob.description}`
                             )}
                             {parse(
                                 `${singleJob.how_to_apply}`
                             )}
-                        </JobItemDescription>
-                    </JobItem>
+                        </ItemDescription>
+                        <ItemPinBtn>
+                            <VscPinned className="pin" />
+                            <BiPlus className="plus" />
+                        </ItemPinBtn>
+                    </Item>
                     :
                     null
             }

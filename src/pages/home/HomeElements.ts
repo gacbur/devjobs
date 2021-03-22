@@ -1,13 +1,11 @@
 import styled from 'styled-components'
 
-import { StandardButton } from '../../components/reusable/StandardButton'
-
 export const HomeCnt = styled.div`
     width:90%;
     display:flex;
     flex-direction: column;
     align-items:center;
-    margin-bottom:7em;
+    margin-bottom:4em;
 `
 
 export const Search = styled.div`
@@ -145,4 +143,7 @@ export const JobList = styled.div`
   @media all and (max-width: 678px) {
       grid-template-columns: 1fr;
   }
+`
+export const JobsNoResults = styled.h3`
+    color: ${props => props.theme.TextColorMain};
 `

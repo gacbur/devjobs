@@ -14,43 +14,43 @@ type JobsPaginationProps = {
 const StyledPaginateContainer = styled.div`
 
     .pagination {
-    width:95%;
-    margin-top:2em;
-    margin-bottom:4em;
-    align-items:center;
-    justify-content:center;
-    display:flex;
-    list-style:none;
-    }
-
-    .break-me {
-    cursor: pointer;
-    margin:0em .4em;
-    font-size:20px;
-    }
-
-    .active {
-    background-color:  #234f94;
-    color:white;
-
-        a{
-            color:white;
+        width:100%;
+        margin-top:2em;
+        margin-bottom:4em;
+        align-items:center;
+        justify-content:center;
+        display:flex;
+        list-style:none;
         }
 
+    .break-me {
+        cursor: pointer;
+        margin:0em .2em;
+        font-size:19px;
+        color: ${props => props.theme.TextColorMain};
+        }
+
+    .active {
+        background-color: #234f94;
+        color:white;
+
+            a{
+                color:white;
+            }
     }
 
     .page{
         cursor:pointer;
-        margin:0em .4em;
+        margin:0em .3em;
         border:1px solid #234f94;
         border-radius:8px;
         display:flex;
         align-items:center;
         justify-content:center;
-        min-width:40px;
-        min-height:40px;
+        max-width:40px;
+        max-height:40px;
         transition:.2s;
-        font-size:14px;
+        font-size:13px;
         color: ${props => props.theme.TextColorMain};
         
         a{
@@ -66,14 +66,24 @@ const StyledPaginateContainer = styled.div`
         }
     }
 
-    .previous, .next{
+    .next.disabled{
+        display:none;
+    }
 
-    cursor:pointer;
-        margin:0em .4em;
+    .previous.disabled{
+        display:none;
+    }
+
+
+
+    .previous, .next{
+        display:flex;
+        cursor:pointer;
+        margin:0em .1em;
         border:1px solid #234f94;
         color:#234f94;
         border-radius:8px;
-        width:70px;
+        width:65px;
         font-size:13px;
         height:40px;
         transition:.2s;
@@ -92,22 +102,25 @@ const StyledPaginateContainer = styled.div`
             color:white;
             transition:.2s;
         }
-    }
-    `;
+    }`
 
 const JobsPagination: FC<JobsPaginationProps> = ({ page, setPage, hasNextPage }) => {
 
     return (
         <StyledPaginateContainer>
             <ReactPaginate
-                previousLabel="previous"
-                nextLabel="next"
+                previousLabel='previous'
+                nextLabel='next'
                 breakLabel="..."
                 breakClassName="break-me"
                 containerClassName="pagination"
                 activeClassName="active"
                 pageClassName="page"
+                previousClassName={`previous ${page === 1 ? 'disabled' : ''}`}
+                nextClassName={`next ${hasNextPage ? '' : 'disabled'}`}
                 pageLinkClassName="page"
+                pageRangeDisplayed={0}
+                marginPagesDisplayed={1}
                 forcePage={page - 1}
                 pageCount={hasNextPage ? page + 1 : page}
                 onPageChange={(props: any) => {

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 
-export const JobItem = styled.div`
+export const Item = styled.div`
     position:relative;
     background-color: ${props => props.theme.elementsBackgroundColor};
     padding: 2em 2em;
@@ -18,7 +18,7 @@ export const JobItem = styled.div`
         }
 `
 
-export const JobItemLogo = styled.div`
+export const ItemLogo = styled.div`
     position:absolute;
     left:50%;
     top:10px;
@@ -37,14 +37,13 @@ export const JobItemLogo = styled.div`
     border-radius:20px;
     overflow:hidden;
 
-
     img{
         width: 100%;
         display:block;
     }
 `
 
-export const JobItemCompanyH4 = styled.h4`
+export const ItemCompanyH4 = styled.h4`
     color: ${props => props.theme.TextColorMain};
     font-size:18px;
     margin-top:5em;
@@ -52,33 +51,33 @@ export const JobItemCompanyH4 = styled.h4`
     transition:.3s;
 `
 
-export const JobItemDateP = styled.p`
+export const ItemDateP = styled.p`
     color: ${props => props.theme.TextColorSecondary};
     font-size:13px;
     margin-top:.5em;
     transition:.3s;
 `
-export const JobItemEmploymentP = styled.p`
+export const ItemEmploymentP = styled.p`
     color: ${props => props.theme.TextColorSecondary};
     font-size:12px;
     margin-top:.5em;
     transition:.3s;
 `
-export const JobItemTitleH3 = styled.h3`
+export const ItemTitleH3 = styled.h3`
     color: ${props => props.theme.TextColorMain};
     font-size:19px;
     margin-top:2em;
     flex-grow:1;
     transition:.3s;
 `
-export const JobItemLocationH6 = styled.h6`
+export const ItemLocationH6 = styled.h6`
     color: #3470a8;
     margin-top:1.5em;
     font-size:13px;
     transition:.3s;
 `
 
-export const JobItemDescription = styled.div`
+export const ItemDescription = styled.div`
     margin:2em 0em;
     padding:.5em;
   
@@ -139,4 +138,40 @@ export const JobItemDescription = styled.div`
         color: ${props => props.theme.TextColorMain};
         margin-top:1.5em;
     }
+`
+export const ItemPinBtn = styled.button`
+    cursor:pointer;
+    position:absolute;
+    top:120px;
+    right:70px;
+    background-color: #234f94;
+    border:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    width:50px;
+    height:50px;
+    border-radius:50em;
+    transition:.3s;
+
+    &:hover{
+        background-color: #1d4079;
+        transition:.3s;
+    }
+
+    .pin{
+        font-size:25px;
+        color:white;
+        margin:3px 3px 0px 0px;
+    }
+
+    .plus{
+        font-size:19px;
+        top:10px;
+        left:30px;
+        color:white;
+        position:absolute;
+    }
+
 `

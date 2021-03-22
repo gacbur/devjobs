@@ -1,10 +1,12 @@
-import React from 'react'
+import { PinnedCnt, TitleCnt, TitleH4 } from './PinnedElements'
 
 const Pinned = () => {
     return (
-        <div>
-            Pinned
-        </div>
+        <PinnedCnt>
+            <TitleCnt>
+                <TitleH4>Pinned jobs</TitleH4>
+            </TitleCnt>
+        </PinnedCnt>
     )
 }
 

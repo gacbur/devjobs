@@ -23,7 +23,6 @@ const JobItem: FC<JobItemProps> = ({ item }) => {
         title,
     } = item
 
-
     return (
         <JobEl onClick={() => history.push(`/job-item/${id}`)}>
             <JobElDateP>{created_at.slice(0, 11)}</JobElDateP>

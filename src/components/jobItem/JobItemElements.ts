@@ -9,7 +9,7 @@ export const JobEl = styled.div`
     display:flex;
     flex-direction:column;
     padding:1em .5em;
-    margin:1em .4em;
+    margin:.6em .3em;
     font-size: 26px;
     box-shadow: 0 2px 8px rgba(0,0,0,.3);
     border-radius:10px;
@@ -38,11 +38,13 @@ export const JobEl = styled.div`
     @media all and (max-width:675px){
         width:330px;
         height:220px;
+        margin:.4em .0em;
     }
 
     @media all and (max-width:400px){
-        width:250px;
-        height:20px;
+        width:280px;
+        height:195px;
+        margin:.3em .0em;
     }
 `
 

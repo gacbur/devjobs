@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 
-import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList } from './HomeElements'
+import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList, JobsNoResults } from './HomeElements'
 
 import JobItem from '../../components/jobItem/JobItem'
 import JobsPagination from '../../components/jobsPagination/JobsPagination'
@@ -31,55 +31,55 @@ const Home = () => {
 
     const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page)
 
-
     return (
-        <HomeCnt>
-            <Search>
-                <InputCnt>
-                    <FilterInput
-                        placeholder="Filter by title, companies, expertise..."
-                        name="description"
-                        value={params.description}
-                        onChange={handleParamChange}
-                    >
-
-                    </FilterInput>
-                </InputCnt>
-                <InputCnt>
-                    <LocationInput
-                        placeholder="Filter by location..."
-                        name="location"
-                        value={params.location}
-                        onChange={handleParamChange}
-                    >
-                    </LocationInput>
-                </InputCnt>
-                <InputCnt>
-                    <label htmlFor="full-time-checkbox">
-                        Full Time
+        <>
+            <HomeCnt>
+                <Search>
+                    <InputCnt>
+                        <FilterInput
+                            placeholder="Filter by title, companies, expertise..."
+                            name="description"
+                            value={params.description}
+                            onChange={handleParamChange}
+                        >
+                        </FilterInput>
+                    </InputCnt>
+                    <InputCnt>
+                        <LocationInput
+                            placeholder="Filter by location..."
+                            name="location"
+                            value={params.location}
+                            onChange={handleParamChange}
+                        >
+                        </LocationInput>
+                    </InputCnt>
+                    <InputCnt>
+                        <label htmlFor="full-time-checkbox">
+                            Full Time
                      </label>
-                    <FullTimeCheckbox
-                        value={params.full_time}
-                        onChange={handleParamChange}
-                    >
-                    </FullTimeCheckbox>
-                </InputCnt>
-            </Search>
-            {loading ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>}
-            {loading && <ClipLoader size={80} color="#3470a8" />}
-            {error && <h1>Error. Try refreshing.</h1>}
-            {
-                jobs.length > 0 ?
-                    <JobList>
-                        {jobs.map(item => {
-                            return <JobItem key={item.id} item={item} />
-                        })}
-                    </JobList>
-                    :
-                    null
-            }
-            {/* {loading ? null : jobs.length === 0 ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>} */}
-        </HomeCnt>
+                        <FullTimeCheckbox
+                            value={params.full_time}
+                            onChange={handleParamChange}
+                        >
+                        </FullTimeCheckbox>
+                    </InputCnt>
+                </Search>
+                {loading ? null : jobs.length === 0 ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>}
+                {loading && <ClipLoader size={80} color="#3470a8" />}
+                {jobs.length === 0 && !loading ? <JobsNoResults>Found no results ...</JobsNoResults> : null}
+                {
+                    jobs.length > 0 ?
+                        <JobList>
+                            {jobs.map(item => {
+                                return <JobItem key={item.id} item={item} />
+                            })}
+                        </JobList>
+                        :
+                        null
+                }
+            </HomeCnt>
+            { loading ? null : jobs.length === 0 ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>}
+        </>
     )
 }
 
