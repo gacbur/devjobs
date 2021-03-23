@@ -6,7 +6,7 @@ interface InitialStateI {
 }
 
 const initialState: InitialStateI = {
-    pinnedJobs: []
+    pinnedJobs: localStorage.getItem('pinnedJobs') ? JSON.parse(localStorage.getItem('pinnedJobs') || '{}') : []
 }
 
 const pinnedJobsReducer = (state: InitialStateI = initialState, action: PinnedJobsDispatchTypes): InitialStateI => {

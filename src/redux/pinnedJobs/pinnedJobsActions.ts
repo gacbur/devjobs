@@ -8,6 +8,8 @@ export const addToPinned = (job: job) => (dispatch: Dispatch<PinnedJobsDispatchT
         type: ADD_TO_PINNED,
         payload: job
     })
+
+    localStorage.setItem('pinnedJobs', JSON.stringify(getState().pinnedJobs.pinnedJobs))
 }
 
 export const removeFromPinned = (id: string) => (dispatch: Dispatch<PinnedJobsDispatchTypes>, getState: any) => {
@@ -15,6 +17,8 @@ export const removeFromPinned = (id: string) => (dispatch: Dispatch<PinnedJobsDi
         type: REMOVE_FROM_PINNED,
         payload: id
     })
+
+    localStorage.setItem('pinnedJobs', JSON.stringify(getState().pinnedJobs.pinnedJobs))
 }
 
 

@@ -16,8 +16,6 @@ function App() {
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-  console.log('rerender')
-
   if (!mountedComponent) return <div />
   return (
     <ThemeProvider theme={themeMode}>

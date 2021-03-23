@@ -1,10 +1,16 @@
 import { FC } from 'react'
 
+import { useDispatch } from 'react-redux'
+
 import { useHistory } from 'react-router'
 
 import { job } from '../../redux/jobs/jobsActionTypes'
 
-import { PinnedItem, JobElDateP, JobElEmploymentP, JobElTitleH3, JobElCompanyP, JobElLocationH6 } from './PinnedJobItemElements'
+import { removeFromPinned } from '../../redux/pinnedJobs/pinnedJobsActions'
+
+import { PinnedItem, DateP, EmploymentP, TitleH3, CompanyP, LocationH6, DeleteBtn } from './PinnedJobItemElements'
+
+import { IoTrashBinOutline } from 'react-icons/io5'
 
 type PinnedJobItemProps = {
     item: job
@@ -12,6 +18,7 @@ type PinnedJobItemProps = {
 
 const PinnedJobItem: FC<PinnedJobItemProps> = ({ item }) => {
 
+    const dispatch = useDispatch()
     const history = useHistory()
 
     const {
@@ -23,13 +30,30 @@ const PinnedJobItem: FC<PinnedJobItemProps> = ({ item }) => {
         title,
     } = item
 
+
+    const handleJobItemActions = (e: any) => {
+        if (e.target.name === 'deleteBtn') {
+            dispatch(removeFromPinned(id))
+        } else {
+            history.push(`/job-item/${id}`)
+        }
+    }
+
     return (
-        <PinnedItem onClick={() => history.push(`/job-item/${id}`)}>
-            <JobElDateP>{created_at.slice(0, 11)}</JobElDateP>
-            <JobElEmploymentP>{type}</JobElEmploymentP>
-            <JobElTitleH3>{title}</JobElTitleH3>
-            <JobElCompanyP>{company}</JobElCompanyP>
-            <JobElLocationH6>{location}</JobElLocationH6>
+        <PinnedItem onClick={(e: any) => handleJobItemActions(e)}>
+            <DateP>{created_at.slice(0, 11)}</DateP>
+            <EmploymentP>{type}</EmploymentP>
+            <TitleH3>{title}</TitleH3>
+            <CompanyP>{company}</CompanyP>
+            <LocationH6>{location}</LocationH6>
+            <DeleteBtn
+                name="deleteBtn"
+                onClick={(e: any) => handleJobItemActions(e)}
+            >
+                <IoTrashBinOutline
+                    className="trash"
+                />
+            </DeleteBtn>
         </PinnedItem>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react'
+import { useEffect, FC, useState } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -7,12 +7,13 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { RootStore } from '../../redux/Store'
 
 import { getSingleJobError, getSingleJobItem, getSingleJobLoading } from '../../redux/singleJobItem/singleJobItemActions'
-import { addToPinned } from '../../redux/pinnedJobs/pinnedJobsActions'
+import { addToPinned, removeFromPinned } from '../../redux/pinnedJobs/pinnedJobsActions'
 
 import { Item, ItemLogo, ItemCompanyH4, ItemDateP, ItemEmploymentP, ItemTitleH3, ItemLocationH6, ItemDescription, ItemPinBtn } from './SingleJobItemElements'
 
 import { VscPinned } from 'react-icons/vsc'
 import { BiPlus } from 'react-icons/bi'
+import { IoIosCheckmarkCircle } from 'react-icons/io'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
@@ -26,14 +27,15 @@ type SingleRecipeProps = RouteComponentProps<SingleRecipeParams>
 
 const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
 
-    console.log(match.params.id)
-
     const dispatch = useDispatch()
+
+    const [isPinned, setIsPinned] = useState<boolean>()
 
     const jobs = useSelector((state: RootStore) => state.jobs.jobs)
     const singleJobLoading = useSelector((state: RootStore) => state.singleJob.singleJobsLoading)
     const singleJobError = useSelector((state: RootStore) => state.singleJob.singleJobsError)
     const singleJob = useSelector((state: RootStore) => state.singleJob.singleJob)
+    const pinnedJobs = useSelector((state: RootStore) => state.pinnedJobs.pinnedJobs)
 
     useEffect(() => {
         let isLoading = true
@@ -59,8 +61,25 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
     }, [])
 
 
-    const handleAddToPinned = () => {
-        dispatch(addToPinned(singleJob))
+    useEffect(() => {
+        const handleCheckIfPinned = () => {
+            const isInPinned = pinnedJobs.find(item => item.id === match.params.id)
+            if (isInPinned) {
+                setIsPinned(true)
+            } else {
+                setIsPinned(false)
+            }
+        }
+        handleCheckIfPinned()
+    })
+
+
+    const handleJobPinButton = () => {
+        if (isPinned) {
+            dispatch(removeFromPinned(match.params.id))
+        } else {
+            dispatch(addToPinned(singleJob))
+        }
     }
 
 
@@ -89,10 +108,11 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
                             )}
                         </ItemDescription>
                         <ItemPinBtn
-                            onClick={() => handleAddToPinned()}
+                            onClick={() => handleJobPinButton()}
                         >
                             <VscPinned className="pin" />
                             <BiPlus className="plus" />
+                            {isPinned ? <IoIosCheckmarkCircle className="checkmark" /> : null}
                         </ItemPinBtn>
                     </Item>
                     :

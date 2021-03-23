@@ -7,6 +7,8 @@ export const getSingleJobItem = (singleJob: job) => (dispatch: Dispatch<SingleJo
         type: GET_SINGLE_JOB_ITEM,
         payload: singleJob
     })
+
+    localStorage.setItem('singleJobItem', JSON.stringify(getState().singleJob.singleJob))
 }
 
 export const getSingleJobError = (error: boolean) => (dispatch: Dispatch<SingleJobDispatchTypes>, getState: any) => {

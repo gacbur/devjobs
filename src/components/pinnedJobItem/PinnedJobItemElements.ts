@@ -17,7 +17,6 @@ export const PinnedItem = styled.div`
 
         &:hover{
             cursor: pointer;
-            transform: scale(1.04)
         }
 
 
@@ -51,32 +50,60 @@ export const PinnedItem = styled.div`
     }
 `
 
-export const JobElDateP = styled.p`
+export const DateP = styled.p`
     color: ${props => props.theme.TextColorSecondary};
     font-size:12px;
     transition:.3s;
 `
-export const JobElEmploymentP = styled.p`
+export const EmploymentP = styled.p`
     color: ${props => props.theme.TextColorSecondary};
     font-size:12px;
     margin-top:.3em;
     transition:.3s;
 `
-export const JobElTitleH3 = styled.h3`
+export const TitleH3 = styled.h3`
     color: ${props => props.theme.TextColorMain};
     font-size:17px;
     margin-top:.7em;
     flex-grow:1;
     transition:.3s;
 `
-export const JobElCompanyP = styled.p`
+export const CompanyP = styled.p`
     color: ${props => props.theme.TextColorSecondary};
     font-size:12px;
     transition:.3s;
 `
-export const JobElLocationH6 = styled.h6`
+export const LocationH6 = styled.h6`
     color: #3470a8;
     margin-top:.5em;
     font-size:13px;
     transition:.3s;
+`
+export const DeleteBtn = styled.button`
+    cursor:pointer;
+    position:absolute;
+    right:15px;
+    bottom:15px;
+    background-color: #234f94;
+    border:none;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    width:55px;
+    height:55px;
+    border-radius:50em;
+    transition:.3s;
+
+    &:hover{
+        background-color: #1d4079;
+        transition:.3s;
+    }
+
+    .trash{
+        pointer-events: none;
+        font-size:25px;
+        color:white;
+    }
+
 `

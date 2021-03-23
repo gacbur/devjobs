@@ -7,6 +7,7 @@ interface InitialStateI {
 }
 
 const initialState: InitialStateI = {
+    singleJob: localStorage.getItem('singleJobItem') ? JSON.parse(localStorage.getItem('singleJobItem') || '{}') : [],
     singleJobsLoading: true,
     singleJobsError: false
 }

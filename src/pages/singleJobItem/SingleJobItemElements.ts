@@ -174,4 +174,15 @@ export const ItemPinBtn = styled.button`
         position:absolute;
     }
 
+    .checkmark{
+        position:absolute;
+        left:-3px;
+        top:0px;
+        width:25px;
+        color:#5fbf5c;
+        height:25px;
+        border-radius:50em;
+
+    }
+
 `

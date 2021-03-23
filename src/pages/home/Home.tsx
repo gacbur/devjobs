@@ -29,7 +29,7 @@ const Home = () => {
         })
     }
 
-    const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page)
+    const { jobs, loading, hasNextPage } = useFetchJobs(params, page)
 
     return (
         <>
