@@ -7,8 +7,11 @@ import { useDarkMode } from "./hooks/useDarkMode"
 
 import { AppWrapper } from './AppElements'
 
+import ScrollToTop from './components/scrollToTop/ScrollToTop'
+
 import Navbar from './layouts/navbar/Navbar'
 import Main from './layouts/main/Main'
+
 
 function App() {
 
@@ -23,6 +26,7 @@ function App() {
         <GlobalStyles />
         <AppWrapper>
           <Router>
+            <ScrollToTop />
             <Navbar theme={theme} toggleTheme={themeToggler} />
             <Main />
           </Router>

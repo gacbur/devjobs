@@ -44,21 +44,27 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
         dispatch(getSingleJobError(error))
 
         const getJobItem = (jobsItemId: string) => {
-            const item = jobs.filter(item => item.id === jobsItemId)
-            if (item[0]) {
-                dispatch(getSingleJobItem(item[0]))
+            const item = jobs.find(item => item.id === jobsItemId)
+            const pinnedItem = pinnedJobs.find(item => item.id === jobsItemId)
+            if (item) {
+                dispatch(getSingleJobItem(item))
                 isLoading = false
                 dispatch(getSingleJobLoading(isLoading))
-            } else {
+            }
+            else if (pinnedItem) {
+                dispatch(getSingleJobItem(pinnedItem))
+                isLoading = false
+                dispatch(getSingleJobLoading(isLoading))
+            }
+            else {
                 isLoading = false
                 error = true
                 dispatch(getSingleJobLoading(isLoading))
                 dispatch(getSingleJobError(error))
             }
         }
-
         getJobItem(match.params.id)
-    }, [])
+    }, [match.params.id])
 
 
     useEffect(() => {
@@ -73,7 +79,6 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
         handleCheckIfPinned()
     })
 
-
     const handleJobPinButton = () => {
         if (isPinned) {
             dispatch(removeFromPinned(match.params.id))
@@ -81,8 +86,6 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
             dispatch(addToPinned(singleJob))
         }
     }
-
-
 
     return (
         <>

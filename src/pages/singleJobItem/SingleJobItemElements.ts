@@ -39,7 +39,7 @@ export const ItemLogo = styled.div`
 
     img{
         width: 100%;
-        display:block;
+        display:flex;
     }
 `
 
@@ -83,6 +83,7 @@ export const ItemDescription = styled.div`
   
     *{
         transition:.3s;
+        word-wrap: break-word;
     }
 
     pre{
@@ -142,8 +143,8 @@ export const ItemDescription = styled.div`
 export const ItemPinBtn = styled.button`
     cursor:pointer;
     position:absolute;
-    top:120px;
-    right:70px;
+    top:30px;
+    right:30px;
     background-color: #234f94;
     border:none;
     display:flex;
@@ -154,6 +155,11 @@ export const ItemPinBtn = styled.button`
     height:50px;
     border-radius:50em;
     transition:.3s;
+
+    @media all and (max-width:450px){
+        top:10px;
+        right:10px;
+    }
 
     &:hover{
         background-color: #1d4079;

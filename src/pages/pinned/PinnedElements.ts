@@ -28,7 +28,7 @@ export const ItemList = styled.div`
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media all and (max-width: 640px){
+    @media all and (max-width: 680px){
             grid-template-columns: repeat(1, 1fr);
     }
 

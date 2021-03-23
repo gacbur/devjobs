@@ -35,6 +35,7 @@ const PinnedJobItem: FC<PinnedJobItemProps> = ({ item }) => {
         if (e.target.name === 'deleteBtn') {
             dispatch(removeFromPinned(id))
         } else {
+            console.log(id)
             history.push(`/job-item/${id}`)
         }
     }

@@ -38,13 +38,19 @@ export const PinnedItem = styled.div`
     }
 
     @media all and (max-width:700px){
-        width:270px;
+        width:295px;
         height:190px;
         margin:.3em .0em;
     }
 
     @media all and (max-width:640px){
         width:350px;
+        height:210px;
+        margin:.3em .0em;
+    }
+
+    @media all and (max-width:450px){
+        width:285px;
         height:210px;
         margin:.3em .0em;
     }
@@ -64,7 +70,7 @@ export const EmploymentP = styled.p`
 export const TitleH3 = styled.h3`
     color: ${props => props.theme.TextColorMain};
     font-size:17px;
-    margin-top:.7em;
+    margin-top:1.2em;
     flex-grow:1;
     transition:.3s;
 `
@@ -83,15 +89,15 @@ export const DeleteBtn = styled.button`
     cursor:pointer;
     position:absolute;
     right:15px;
-    bottom:15px;
+    top:15px;
     background-color: #234f94;
     border:none;
     display:flex;
     justify-content:center;
     align-items:center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    width:55px;
-    height:55px;
+    width:50px;
+    height:50px;
     border-radius:50em;
     transition:.3s;
 
