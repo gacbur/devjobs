@@ -1,31 +1,73 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 
-import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList, JobsNoResults } from './HomeElements'
+import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList, JobsNoResults, SearchButton } from './HomeElements'
 
 import JobItem from '../../components/jobItem/JobItem'
 import JobsPagination from '../../components/jobsPagination/JobsPagination'
+import SearchFilterItems from '../../components/searchFilterItems/SearchFilterItems'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
 import useFetchJobs from '../../hooks/useFetchJobs'
 
-type paramsProps = {
-    description?: string,
-    location?: string,
+export type paramsProps = {
+    description: string,
+    location: string,
     full_time?: any
 }
 
 const Home = () => {
 
-    const [params, setParams] = useState<paramsProps>({})
+    const [params, setParams] = useState<paramsProps>({
+        description: '',
+        location: '',
+        full_time: false
+    })
+
+    const [inputValues, setInputValues] = useState<paramsProps>({
+        description: '',
+        location: '',
+        full_time: false
+    })
+
+    // const [filterItemsVisible, setFilterItemsVisible] = useState<boolean>(false)
+
     const [page, setPage] = useState(1)
 
-    const handleParamChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleInputValuesChange = (e: ChangeEvent<HTMLInputElement>) => {
         const param = e.target.name
         const value = e.target.value
+        const type = e.target.type
+        if (type === 'checkbox') {
+            setInputValues({
+                ...inputValues,
+                [param]: !inputValues.full_time
+            })
+        } else {
+            setInputValues({
+                ...inputValues,
+                [param]: value
+            })
+        }
+    }
+
+    // useEffect(() => {
+    //     if (params === {
+    //         description: '',
+    //         location: '',
+    //         full_time: false
+    //     }) {
+    //         setFilterItemsVisible(false)
+    //     } else {
+    //         setFilterItemsVisible(true)
+    //     }
+    // }, [params])
+
+
+    const handleSetSearchParams = () => {
         setPage(1)
-        setParams(prevParams => {
-            return { ...prevParams, [param]: value }
+        setParams({
+            ...inputValues
         })
     }
 
@@ -39,8 +81,8 @@ const Home = () => {
                         <FilterInput
                             placeholder="Filter by title, companies, expertise..."
                             name="description"
-                            value={params.description}
-                            onChange={handleParamChange}
+                            value={inputValues.description}
+                            onChange={handleInputValuesChange}
                         >
                         </FilterInput>
                     </InputCnt>
@@ -48,8 +90,8 @@ const Home = () => {
                         <LocationInput
                             placeholder="Filter by location..."
                             name="location"
-                            value={params.location}
-                            onChange={handleParamChange}
+                            value={inputValues.location}
+                            onChange={handleInputValuesChange}
                         >
                         </LocationInput>
                     </InputCnt>
@@ -58,15 +100,38 @@ const Home = () => {
                             Full Time
                      </label>
                         <FullTimeCheckbox
-                            value={params.full_time}
-                            onChange={handleParamChange}
+                            checked={inputValues.full_time}
+                            onChange={handleInputValuesChange}
                         >
                         </FullTimeCheckbox>
                     </InputCnt>
                 </Search>
-                {loading ? null : jobs.length === 0 ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>}
+                <SearchButton
+                    onClick={handleSetSearchParams}
+                >
+                    Search</SearchButton>
+                <SearchFilterItems
+                    paramsInfo={params}
+                    setParams={setParams}
+                    inputValues={inputValues}
+                    setInputValues={setInputValues}
+                />
+                {loading ? null
+                    :
+                    jobs.length === 0 ?
+                        null
+                        :
+                        <JobsPagination
+                            page={page}
+                            setPage={setPage}
+                            hasNextPage={hasNextPage}
+                        />
+                }
                 {loading && <ClipLoader size={80} color="#3470a8" />}
-                {jobs.length === 0 && !loading ? <JobsNoResults>Found no results ...</JobsNoResults> : null}
+                {jobs.length === 0 && !loading ?
+                    <JobsNoResults>Found no results ...</JobsNoResults>
+                    :
+                    null}
                 {
                     jobs.length > 0 ?
                         <JobList>
@@ -78,7 +143,13 @@ const Home = () => {
                         null
                 }
             </HomeCnt>
-            { loading ? null : jobs.length === 0 ? null : <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage}></JobsPagination>}
+            { loading ?
+                null
+                :
+                jobs.length === 0 ?
+                    null
+                    :
+                    <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />}
         </>
     )
 }

@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { RouteComponentProps, withRouter } from 'react-router';
 
+import { useToasts } from 'react-toast-notifications';
+
 import { RootStore } from '../../redux/Store'
 
 import { getSingleJobError, getSingleJobItem, getSingleJobLoading } from '../../redux/singleJobItem/singleJobItemActions'
@@ -26,6 +28,8 @@ type SingleRecipeParams = {
 type SingleRecipeProps = RouteComponentProps<SingleRecipeParams>
 
 const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
+
+    const { addToast } = useToasts()
 
     const dispatch = useDispatch()
 
@@ -68,7 +72,7 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
 
 
     useEffect(() => {
-        const handleCheckIfPinned = () => {
+        const checkIfPinned = () => {
             const isInPinned = pinnedJobs.find(item => item.id === match.params.id)
             if (isInPinned) {
                 setIsPinned(true)
@@ -76,14 +80,22 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
                 setIsPinned(false)
             }
         }
-        handleCheckIfPinned()
-    })
+        checkIfPinned()
+    }, [])
+
 
     const handleJobPinButton = () => {
-        if (isPinned) {
+        const isInPinned = pinnedJobs.find(item => item.id === match.params.id)
+        if (isInPinned) {
             dispatch(removeFromPinned(match.params.id))
+            addToast('This job was successfully removed from pinned.',
+                { appearance: 'success' })
+            setIsPinned(false)
         } else {
             dispatch(addToPinned(singleJob))
+            addToast('This job was successfully pinned.',
+                { appearance: 'success' })
+            setIsPinned(true)
         }
     }
 

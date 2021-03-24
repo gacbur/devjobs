@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
-export const PinnedItem = styled.div`
+export const PinnedItem = styled.div.attrs({
+    name: 'pinnedItem',
+})`
     position: relative;
     background-color: ${props => props.theme.elementsBackgroundColor};
     width: 300px;

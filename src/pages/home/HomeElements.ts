@@ -13,7 +13,7 @@ export const Search = styled.div`
     transition: .3s;
     height:4em;
     padding:.5em 1em;
-    margin-bottom:3.5em;
+    margin-bottom:1em;
     width:100%;
     max-width:1000px;
     display:flex;
@@ -63,6 +63,7 @@ export const InputCnt = styled.div`
 
             &:nth-child(3){
                 width:100%;
+                
                 border-bottom: none;
             }
         }
@@ -127,8 +128,28 @@ export const FullTimeCheckbox = styled.input.attrs({
         }
 `
 
+export const SearchButton = styled.button`
+    cursor:pointer;
+    color: ${props => props.theme.TextColorMain};
+    background-color: #234f94;
+    transition:.3s;
+    padding:1.2em 3em;
+    border:none;
+    border-radius:6px;
+    color: white;
+    margin-bottom:5em;
+    box-shadow:0 2px 8px rgba(0,0,0,.3);
+        
+    &:hover{
+        background-color: #1d4079;
+        transition:.3s;
+    }
+`
+
 export const JobList = styled.div`
     width:100%;
+    padding:2em 0em;
+    border-top:1px solid ${props => props.theme.elementsBorder};
     max-width:1000px;
     min-height:500px;
     justify-items: center;
@@ -145,5 +166,12 @@ export const JobList = styled.div`
   }
 `
 export const JobsNoResults = styled.h3`
+    margin-top:2em;
+    padding:2em 0em;
+    width:95%;
+    max-width:1000px;
+    border-top:1px solid ${props => props.theme.elementsBorder};
+    display:flex;
+    justify-content:center;
     color: ${props => props.theme.TextColorMain};
 `

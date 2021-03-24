@@ -1,11 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { RootStore } from '../../redux/Store'
 
 import PinnedJobItem from '../../components/pinnedJobItem/PinnedJobItem'
 
-import { PinnedCnt, TitleCnt, TitleH4, ItemList } from './PinnedElements'
-import { Item } from '../singleJobItem/SingleJobItemElements'
+import { PinnedCnt, TitleCnt, TitleH4, ItemList, NoPinnedJobsFound } from './PinnedElements'
 
 
 const Pinned = () => {
@@ -17,15 +16,21 @@ const Pinned = () => {
             <TitleCnt>
                 <TitleH4>Pinned jobs</TitleH4>
             </TitleCnt>
-            <ItemList>
-                {pinnedJobs.length > 0 ?
-                    pinnedJobs.map(item => {
-                        return <PinnedJobItem key={item.id} item={item} />
-                    })
-                    :
-                    null
-                }
-            </ItemList>
+
+            {pinnedJobs.length > 0 ?
+                <ItemList>
+                    {
+                        pinnedJobs.map(item => {
+                            return <PinnedJobItem key={item.id} item={item} />
+                        })
+                    }
+                </ItemList>
+                :
+                <NoPinnedJobsFound>
+                    No Jobs were pinned yet...
+                </NoPinnedJobsFound>
+            }
+
         </PinnedCnt>
     )
 }

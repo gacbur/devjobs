@@ -31,6 +31,14 @@ export const ItemList = styled.div`
     @media all and (max-width: 680px){
             grid-template-columns: repeat(1, 1fr);
     }
+`
 
+export const NoPinnedJobsFound = styled.h3`
+    font-size:17px;
+    color: ${props => props.theme.TextColorMain};
+    display:flex;
+    width:100%;
+    margin-top:4em;
+    justify-content:center;
 `
 

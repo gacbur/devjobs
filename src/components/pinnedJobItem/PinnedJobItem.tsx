@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 
 import { useHistory } from 'react-router'
 
+import { useToasts } from 'react-toast-notifications';
+
 import { job } from '../../redux/jobs/jobsActionTypes'
 
 import { removeFromPinned } from '../../redux/pinnedJobs/pinnedJobsActions'
@@ -18,7 +20,10 @@ type PinnedJobItemProps = {
 
 const PinnedJobItem: FC<PinnedJobItemProps> = ({ item }) => {
 
+    const { addToast } = useToasts()
+
     const dispatch = useDispatch()
+
     const history = useHistory()
 
     const {
@@ -30,18 +35,20 @@ const PinnedJobItem: FC<PinnedJobItemProps> = ({ item }) => {
         title,
     } = item
 
-
-    const handleJobItemActions = (e: any) => {
-        if (e.target.name === 'deleteBtn') {
-            dispatch(removeFromPinned(id))
-        } else {
-            console.log(id)
+    const handleGoToSingleJob = (e: any) => {
+        if (e.target.name !== 'deleteBtn') {
             history.push(`/job-item/${id}`)
         }
     }
 
+    const handleDeleteJobItem = () => {
+        dispatch(removeFromPinned(id))
+        addToast("Job was successfully removed from Pinned", { appearance: 'success' })
+    }
+
     return (
-        <PinnedItem onClick={(e: any) => handleJobItemActions(e)}>
+        <PinnedItem
+            onClick={(e: any) => handleGoToSingleJob(e)}>
             <DateP>{created_at.slice(0, 11)}</DateP>
             <EmploymentP>{type}</EmploymentP>
             <TitleH3>{title}</TitleH3>
@@ -49,7 +56,7 @@ const PinnedJobItem: FC<PinnedJobItemProps> = ({ item }) => {
             <LocationH6>{location}</LocationH6>
             <DeleteBtn
                 name="deleteBtn"
-                onClick={(e: any) => handleJobItemActions(e)}
+                onClick={(e: any) => handleDeleteJobItem()}
             >
                 <IoTrashBinOutline
                     className="trash"
