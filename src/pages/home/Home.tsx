@@ -1,12 +1,11 @@
-import { useState, ChangeEvent, useEffect } from 'react'
+import { useState, ChangeEvent } from 'react'
 
-import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList, JobsNoResults, SearchButton } from './HomeElements'
+import { HomeCnt, Search, InputCnt, FilterInput, LocationInput, FullTimeCheckbox, JobList, JobsNoResults, SearchButton, SearchInputsCnt } from './HomeElements'
 
 import JobItem from '../../components/jobItem/JobItem'
 import JobsPagination from '../../components/jobsPagination/JobsPagination'
 import SearchFilterItems from '../../components/searchFilterItems/SearchFilterItems'
-
-import ClipLoader from 'react-spinners/ClipLoader'
+import Loading from '../../components/loading/Loading'
 
 import useFetchJobs from '../../hooks/useFetchJobs'
 
@@ -30,9 +29,7 @@ const Home = () => {
         full_time: false
     })
 
-    // const [filterItemsVisible, setFilterItemsVisible] = useState<boolean>(false)
-
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState<number>(1)
 
     const handleInputValuesChange = (e: ChangeEvent<HTMLInputElement>) => {
         const param = e.target.name
@@ -51,20 +48,8 @@ const Home = () => {
         }
     }
 
-    // useEffect(() => {
-    //     if (params === {
-    //         description: '',
-    //         location: '',
-    //         full_time: false
-    //     }) {
-    //         setFilterItemsVisible(false)
-    //     } else {
-    //         setFilterItemsVisible(true)
-    //     }
-    // }, [params])
-
-
-    const handleSetSearchParams = () => {
+    const handleSetSearchParams = (e: any) => {
+        e.preventDefault()
         setPage(1)
         setParams({
             ...inputValues
@@ -76,45 +61,45 @@ const Home = () => {
     return (
         <>
             <HomeCnt>
-                <Search>
-                    <InputCnt>
-                        <FilterInput
-                            placeholder="Filter by title, companies, expertise..."
-                            name="description"
-                            value={inputValues.description}
-                            onChange={handleInputValuesChange}
-                        >
-                        </FilterInput>
-                    </InputCnt>
-                    <InputCnt>
-                        <LocationInput
-                            placeholder="Filter by location..."
-                            name="location"
-                            value={inputValues.location}
-                            onChange={handleInputValuesChange}
-                        >
-                        </LocationInput>
-                    </InputCnt>
-                    <InputCnt>
-                        <label htmlFor="full-time-checkbox">
-                            Full Time
+                <Search onSubmit={(e) => handleSetSearchParams(e)}>
+                    <SearchInputsCnt>
+                        <InputCnt>
+                            <FilterInput
+                                placeholder="Filter by title, companies, expertise..."
+                                name="description"
+                                value={inputValues.description}
+                                onChange={handleInputValuesChange}
+                            >
+                            </FilterInput>
+                        </InputCnt>
+                        <InputCnt>
+                            <LocationInput
+                                placeholder="Filter by location..."
+                                name="location"
+                                value={inputValues.location}
+                                onChange={handleInputValuesChange}
+                            >
+                            </LocationInput>
+                        </InputCnt>
+                        <InputCnt>
+                            <label htmlFor="full-time-checkbox">
+                                Full Time
                      </label>
-                        <FullTimeCheckbox
-                            checked={inputValues.full_time}
-                            onChange={handleInputValuesChange}
-                        >
-                        </FullTimeCheckbox>
-                    </InputCnt>
+                            <FullTimeCheckbox
+                                checked={inputValues.full_time}
+                                onChange={handleInputValuesChange}
+                            >
+                            </FullTimeCheckbox>
+                        </InputCnt>
+                    </SearchInputsCnt>
+                    <SearchButton>Search</SearchButton>
                 </Search>
-                <SearchButton
-                    onClick={handleSetSearchParams}
-                >
-                    Search</SearchButton>
                 <SearchFilterItems
                     paramsInfo={params}
-                    setParams={setParams}
                     inputValues={inputValues}
+                    setParams={setParams}
                     setInputValues={setInputValues}
+                    setPage={setPage}
                 />
                 {loading ? null
                     :
@@ -127,7 +112,7 @@ const Home = () => {
                             hasNextPage={hasNextPage}
                         />
                 }
-                {loading && <ClipLoader size={80} color="#3470a8" />}
+                {loading && <Loading />}
                 {jobs.length === 0 && !loading ?
                     <JobsNoResults>Found no results ...</JobsNoResults>
                     :
@@ -149,7 +134,11 @@ const Home = () => {
                 jobs.length === 0 ?
                     null
                     :
-                    <JobsPagination page={page} setPage={setPage} hasNextPage={hasNextPage} />}
+                    <JobsPagination
+                        page={page}
+                        setPage={setPage}
+                        hasNextPage={hasNextPage}
+                    />}
         </>
     )
 }

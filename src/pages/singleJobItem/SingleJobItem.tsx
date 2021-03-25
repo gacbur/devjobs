@@ -13,11 +13,11 @@ import { addToPinned, removeFromPinned } from '../../redux/pinnedJobs/pinnedJobs
 
 import { Item, ItemLogo, ItemCompanyH4, ItemDateP, ItemEmploymentP, ItemTitleH3, ItemLocationH6, ItemDescription, ItemPinBtn } from './SingleJobItemElements'
 
+import Loading from '../../components/loading/Loading'
+
 import { VscPinned } from 'react-icons/vsc'
 import { BiPlus } from 'react-icons/bi'
 import { IoIosCheckmarkCircle } from 'react-icons/io'
-
-import ClipLoader from 'react-spinners/ClipLoader'
 
 import parse from 'html-react-parser';
 
@@ -68,7 +68,7 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
             }
         }
         getJobItem(match.params.id)
-    }, [match.params.id])
+    }, [match.params.id, pinnedJobs, jobs, dispatch])
 
 
     useEffect(() => {
@@ -81,7 +81,7 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
             }
         }
         checkIfPinned()
-    }, [])
+    }, [match.params.id, pinnedJobs])
 
 
     const handleJobPinButton = () => {
@@ -102,7 +102,7 @@ const SingleJobItem: FC<SingleRecipeProps> = ({ match }) => {
     return (
         <>
             {singleJobLoading ?
-                <ClipLoader size={80} color="#3470a8"></ClipLoader>
+                <Loading />
                 :
                 singleJob ?
                     <Item>

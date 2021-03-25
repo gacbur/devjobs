@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const SearchFilterItemsCnt = styled.div`
     width:100%;
-    padding:2em 0em;
+    margin-bottom:3em;
     display:flex;
     flex-direction: column;
     justify-content:center;
@@ -18,7 +18,7 @@ export const ResultBlocksCnt = styled.div`
 export const ResultsBlock = styled.div<{ value?: any }>`
     cursor:pointer;
     color: ${props => props.theme.TextColorMain};
-    padding:.7em 1.4em;
+    padding:.7em .9em;
     background-color: ${props => props.theme.elementsBackgroundColor};
     font-size:12px;
     border: 2px solid ${props => props.theme.elementsBorder};

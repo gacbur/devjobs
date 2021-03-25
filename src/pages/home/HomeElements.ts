@@ -8,17 +8,14 @@ export const HomeCnt = styled.div`
     margin-bottom:4em;
 `
 
-export const Search = styled.div`
-    background-color: ${props => props.theme.elementsBackgroundColor};
+export const Search = styled.form`
     transition: .3s;
-    height:4em;
-    padding:.5em 1em;
+    height:fit-content;
     margin-bottom:1em;
     width:100%;
     max-width:1000px;
     display:flex;
-    border-radius:10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    flex-direction:column;
     
         @media all and (max-width: 600px){
             height:fit-content;
@@ -26,12 +23,50 @@ export const Search = styled.div`
         }
     `
 
+export const SearchInputsCnt = styled.div`
+        background-color: ${props => props.theme.elementsBackgroundColor};
+        border-radius:10px;
+        padding:.3em .5em;
+        box-shadow: 0 2px 8px rgba(0,0,0,.2);
+        width:100%;
+        height:fit-content;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        @media all and (max-width: 600px){
+            flex-direction:column;
+        }
+    `
+
+export const SearchButton = styled.button`
+    cursor:pointer;
+    color: ${props => props.theme.TextColorMain};
+    background-color: #234f94;
+    transition:.3s;
+    padding:1.2em 3em;
+    border:none;
+    flex-grow:1;
+    width:150px;
+    border-radius:6px;
+    color: white;
+    margin:2.5em auto 7em auto;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.3);
+        
+    &:hover{
+        background-color: #1d4079;
+        transition:.3s;
+    }
+`
+
 export const InputCnt = styled.div`
-    height:100%;
+    height:70px;
     display:flex;
     justify-content:center;
     align-items:center;
     border-left: solid 1px ${props => props.theme.elementsBorder};
+    flex-wrap:wrap;
 
     &:nth-child(1){
         width:40%;
@@ -122,29 +157,11 @@ export const FullTimeCheckbox = styled.input.attrs({
     margin-left:1em;
     margin-right:.6em;
 
-
     @media all and (max-width: 600px){
            margin:.8em .5em;
         }
 `
 
-export const SearchButton = styled.button`
-    cursor:pointer;
-    color: ${props => props.theme.TextColorMain};
-    background-color: #234f94;
-    transition:.3s;
-    padding:1.2em 3em;
-    border:none;
-    border-radius:6px;
-    color: white;
-    margin-bottom:5em;
-    box-shadow:0 2px 8px rgba(0,0,0,.3);
-        
-    &:hover{
-        background-color: #1d4079;
-        transition:.3s;
-    }
-`
 
 export const JobList = styled.div`
     width:100%;
@@ -165,6 +182,7 @@ export const JobList = styled.div`
       grid-template-columns: 1fr;
   }
 `
+
 export const JobsNoResults = styled.h3`
     margin-top:2em;
     padding:2em 0em;

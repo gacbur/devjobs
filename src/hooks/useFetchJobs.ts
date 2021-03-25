@@ -45,6 +45,7 @@ const useFetchJobs = (params: any, page: any) => {
             cancelToken1.cancel()
             cancelToken2.cancel()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params, page])
 
     return {
