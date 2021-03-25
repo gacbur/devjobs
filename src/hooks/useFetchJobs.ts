@@ -11,7 +11,9 @@ import axios from 'axios'
 
 const useFetchJobs = (params: any, page: any) => {
 
-    const BASE_URL = '/positions.json'
+
+
+    const BASE_URL = 'https://api.allorigins.win/raw?url=https://jobs.github.com/positions.json'
 
     const dispatch = useDispatch()
     const jobsState = useSelector((state: RootStore) => state.jobs)
