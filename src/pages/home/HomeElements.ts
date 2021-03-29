@@ -114,7 +114,7 @@ export const FilterInput = styled.input`
     position:relative;
     width:95%;
     height:90%;
-    padding:.5em;
+    padding:.5em 1em;
     border:none;
     background-color: ${props => props.theme.elementsBackgroundColor};
     color: ${props => props.theme.TextColorMain};
@@ -132,7 +132,7 @@ export const FilterInput = styled.input`
 export const LocationInput = styled.input`
     width:95%;
     height:90%;
-    padding:.5em;
+    padding:.5em 1em;
     border:none;
     background-color: ${props => props.theme.elementsBackgroundColor};
     color: ${props => props.theme.TextColorMain};
