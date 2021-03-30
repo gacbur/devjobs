@@ -1,46 +1,39 @@
-# Getting Started with Create React App
+# devjobs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![devjobsscreen1](https://user-images.githubusercontent.com/46655309/112963910-20450880-9148-11eb-8d58-8f6804e66d9e.JPG)
+![devjobsscreen2](https://user-images.githubusercontent.com/46655309/112963917-22a76280-9148-11eb-921c-f6060db83c8b.JPG)
+![devjobsscreen3](https://user-images.githubusercontent.com/46655309/112963931-24712600-9148-11eb-84f1-a89699486efe.JPG)
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### Table of Contents
 
-### `npm start`
+- [Description](#description)
+- [How To Use](#how-to-use)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Description
 
-### `npm test`
+devjobs is an web application that will help you find your dream software developer job! Filtering system is there to help you specify your needs. Save job offers that may potentially, or are in your interest and save for later by pinning them, if your eyes would ever get tired by constantly searching for your dream job, there is darkmode that will take some strain off your eyes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Tools
 
-### `npm run build`
+- Typescript
+- Sass
+- Redux
+- styled components
+- github jobs api
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[Back To The Top](#read-me-template)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How To Use
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. git clone (github repo link)
+2. npm install 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
